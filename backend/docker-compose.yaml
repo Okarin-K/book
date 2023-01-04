@@ -1,0 +1,18 @@
+version: '3'
+services:
+    db:
+        platform: linux/x86_64
+        image: mysql:8.0.19
+        ports:
+            - 13306:3306
+        volumes:
+            - db/store:/var/lib/mysql
+            - db/logs:/var/log/mysql
+            - db/my.cnf:/etc/mysql/conf.d/my.cnf
+        container_name: my-db
+        environment:
+            - MYSQL_DATABASE=book-manager
+            - MYSQL_USER=okarin
+            - MYSQL_PASSWORD=password
+            - MYSQL_ROOT_PASSWORD=password
+            - TZ="Asia/Tokyo"

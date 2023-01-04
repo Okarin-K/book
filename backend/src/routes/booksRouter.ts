@@ -2,54 +2,48 @@ import express from 'express';
 
 const booksRouter = express.Router();
 
-const books = [
-    {
-        id: 1,
-        title: 'aaa',
-        category: 'マンガ',
-        impressionOfBook: '面白かったぽん'
-    },
-    {
-        id: 2,
-        title: 'bbb',
-        category: '小説',
-        impressionOfBook: '面白かったぽん'
-    },
-    {
-        id: 3,
-        title: 'ccc',
-        category: '技術書',
-        impressionOfBook: '面白かったぽん'
-    },
-];
+type Book = {
+    title: string | undefined;
+    author: string | undefined;
+    description: string | undefined;
+    imageLink: string | undefined;
+    infoLink: string | undefined;
+};
+
+const books: Book[] = [];
 
 booksRouter.get('/', (req, res, next) => {
     res.send({
         data: {
-            books 
+            books,
         },
         results: {
             status: 200,
-            code: 'Success'
-        }
+            code: 'Success',
+        },
     });
 });
 
 booksRouter.post('/', (req, res, next) => {
     try {
-        const body = req.body;
+        const body = req.body as Book;
 
         console.log(body);
 
-        if(body.title.length <= 0) {
+        if (!body.title || body.title.length <= 0) {
             throw new Error('Bad Request');
         }
 
-        const bookData = {
-            id: body.id,
+        const bookData: Book = {
             title: body.title,
-            category: body.category,
-            impressionOfBook: body.impressionOfBook
+            author: body.author,
+            description: body.description,
+            imageLink: body.imageLink,
+            infoLink: body.infoLink,
+        };
+
+        if (books.find((book) => book.title === bookData.title)) {
+            throw new Error('重複しています。');
         }
 
         books.push(bookData);
@@ -58,30 +52,12 @@ booksRouter.post('/', (req, res, next) => {
             data: {},
             results: {
                 status: 200,
-                code: 'Success'
-            }
+                code: 'Success',
+            },
         });
-    } catch(error) {
+    } catch (error) {
         next(error);
     }
 });
-
-booksRouter.get('/:id', (req, res, next) => {
-    const id = req.params.id ? Number(req.params.id) : undefined;
-
-    console.log(req.params);
-
-    const data = books.filter(book => book.id === id);
-
-    res.send({
-        data: {
-            book: data[0]
-        },
-        results: {
-            status: 200,
-            code: 'Success'
-        }
-    });
-})
 
 export default booksRouter;
