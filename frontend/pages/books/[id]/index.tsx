@@ -1,4 +1,5 @@
-import { Box, Container, Heading, Spinner, Text } from '@chakra-ui/react';
+import { Box, Button, Container, Heading, HStack, Spacer, Spinner, Text, VStack } from '@chakra-ui/react';
+import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import { Books } from '../../../components/bookList';
@@ -35,10 +36,14 @@ export default function BookPage() {
             <Spinner />
         </Container>
     ) : (
-        <Box>
-            <Heading size="md">{book?.title}</Heading>
-            <Text>{book?.category}</Text>
-            <Text>{book?.impressionOfBook}</Text>
-        </Box>
+        <>
+            <Link href="/">もどるっぴ</Link>
+            <VStack width="60%" ml="auto" mr="auto">
+                <Heading>タイトル: {book?.title}</Heading>
+                <Box>種別: {book?.category}</Box>
+                <Heading size="sm">感想・レビュー</Heading>
+                <Text fontSize="md">{book?.impressionOfBook}</Text>
+            </VStack>
+        </>
     );
 }
