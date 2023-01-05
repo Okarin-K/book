@@ -1,6 +1,6 @@
 class Book {
     public constructor(
-        public readonly id: number,
+        public readonly id: number | undefined,
         public readonly title: string,
         public readonly author: string,
         public readonly description: string,

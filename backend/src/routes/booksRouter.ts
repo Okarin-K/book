@@ -1,5 +1,6 @@
 import express from 'express';
 import { BookService } from 'src/application/service/bookService';
+import { BookRequest } from 'src/presentation/request/book';
 
 const booksRouter = express.Router();
 
@@ -16,11 +17,14 @@ booksRouter.get('/', async (req, res, next) => {
     });
 });
 
-booksRouter.post('/', (req, res, next) => {
+booksRouter.post('/', async (req, res, next) => {
     try {
-        const body = req.body as Book;
+        const body = req.body as BookRequest;
 
-        console.log(body);
+        const book = new Book(undefined, body.title, body.author, body.description, body.imageLink, body.infoLink);
+
+        const service = new BookService();
+        await service.create(book);
 
         res.send({
             data: {},
