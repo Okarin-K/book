@@ -11,7 +11,13 @@ export class BookRepository implements BookRepositoryInterface {
 
     async save(book: Readonly<Book>): Promise<void> {
         await this.client.book.create({
-            data: { ...book },
+            data: {
+                title: book.title,
+                author: book.title,
+                description: book.description,
+                imageLink: book.imageLink,
+                infoLink: book.infoLink,
+            },
         });
     }
 }
