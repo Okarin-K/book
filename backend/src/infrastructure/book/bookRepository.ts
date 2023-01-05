@@ -1,5 +1,5 @@
 import { Prisma, PrismaClient } from '@prisma/client';
-import { BookDaoInterface } from 'src/domain/book/daoInterface/book';
+import { Book } from 'src/domain/book/book';
 import { BookRepositoryInterface } from 'src/domain/book/repositoryInterface/book';
 
 export class BookRepository implements BookRepositoryInterface {

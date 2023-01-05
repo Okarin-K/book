@@ -1,3 +1,4 @@
+import { Book } from 'src/domain/book/book';
 import { BookDao } from 'src/infrastructure/book/bookDao';
 import { BookRepository } from 'src/infrastructure/book/bookRepository';
 

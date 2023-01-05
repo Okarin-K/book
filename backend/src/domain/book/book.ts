@@ -1,4 +1,4 @@
-class Book {
+export class Book {
     public constructor(
         public readonly id: number | undefined,
         public readonly title: string,
