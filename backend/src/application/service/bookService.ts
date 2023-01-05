@@ -1,6 +1,6 @@
-import { Book } from 'src/domain/book/book';
-import { BookDao } from 'src/infrastructure/book/bookDao';
-import { BookRepository } from 'src/infrastructure/book/bookRepository';
+import { Book } from '../../domain/book/book';
+import { BookDao } from '../../infrastructure/book/bookDao';
+import { BookRepository } from '../../infrastructure/book/bookRepository';
 
 export class BookService {
     private dao: BookDao;

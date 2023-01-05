@@ -1,6 +1,6 @@
 import { Prisma, PrismaClient } from '@prisma/client';
-import { Book } from 'src/domain/book/book';
-import { BookDaoInterface } from 'src/domain/book/daoInterface/book';
+import { Book } from '../../domain/book/book';
+import { BookDaoInterface } from '../../domain/book/daoInterface/book';
 
 export class BookDao implements BookDaoInterface {
     private client: PrismaClient<Prisma.PrismaClientOptions, never, Prisma.RejectOnNotFound | Prisma.RejectPerOperation | undefined>;
