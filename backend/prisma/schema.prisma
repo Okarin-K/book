@@ -14,7 +14,7 @@ model Book {
   id      Int      @id @default(autoincrement())
   title   String   @unique
   author  String
-  description   String
+  description   String @db.Text
   imageLink     String
   infoLink String
 }
