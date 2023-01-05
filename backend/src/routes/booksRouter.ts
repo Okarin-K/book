@@ -1,22 +1,14 @@
 import express from 'express';
+import { BookService } from 'src/application/service/bookService';
 
 const booksRouter = express.Router();
 
-type Book = {
-    title: string | undefined;
-    author: string | undefined;
-    description: string | undefined;
-    imageLink: string | undefined;
-    infoLink: string | undefined;
-};
+booksRouter.get('/', async (req, res, next) => {
+    const service = new BookService();
+    const data = await service.findAll();
 
-const books: Book[] = [];
-
-booksRouter.get('/', (req, res, next) => {
     res.send({
-        data: {
-            books,
-        },
+        data,
         results: {
             status: 200,
             code: 'Success',
@@ -29,24 +21,6 @@ booksRouter.post('/', (req, res, next) => {
         const body = req.body as Book;
 
         console.log(body);
-
-        if (!body.title || body.title.length <= 0) {
-            throw new Error('Bad Request');
-        }
-
-        const bookData: Book = {
-            title: body.title,
-            author: body.author,
-            description: body.description,
-            imageLink: body.imageLink,
-            infoLink: body.infoLink,
-        };
-
-        if (books.find((book) => book.title === bookData.title)) {
-            throw new Error('重複しています。');
-        }
-
-        books.push(bookData);
 
         res.send({
             data: {},
