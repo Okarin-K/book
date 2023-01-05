@@ -1,5 +1,6 @@
 import express from 'express';
 import { BookService } from 'src/application/service/bookService';
+import { Book } from 'src/domain/book/book';
 import { BookRequest } from 'src/presentation/request/book';
 
 const booksRouter = express.Router();
